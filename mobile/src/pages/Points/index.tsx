@@ -26,6 +26,7 @@ interface Item {
 interface Point {
   id: number;
   image: string;
+  image_url: string;
   name: string;
   latitude: number;
   longitude: number;
@@ -78,7 +79,6 @@ const Points = () => {
   }, []);
 
   useEffect(() => {
-    console.log(selectedItems);
     api
       .get('points', {
         params: {
@@ -88,7 +88,6 @@ const Points = () => {
         },
       })
       .then((response) => {
-        console.log(response);
         setPoints(response.data);
       });
   }, [selectedItems]);
@@ -149,7 +148,7 @@ const Points = () => {
                     <Image
                       style={styles.mapMarkerImage}
                       source={{
-                        uri: point.image,
+                        uri: point.image_url,
                       }}
                     />
                     <Text style={styles.mapMarkerTitle}>{point.name}</Text>
